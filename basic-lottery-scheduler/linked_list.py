@@ -21,7 +21,10 @@ class LinkedList:
         self.tail = node
 
     def remove(self, item):
-        if self.head.item == item:
+        self.remove_by_key(lambda x: x, item)
+
+    def remove_by_key(self, key, target):
+        if key(self.head.item) == target:
             if self.head.next == None:
                 self.head = None
                 self.tail = None
@@ -31,7 +34,7 @@ class LinkedList:
         
         prev = None
         current = self.head
-        while current.item != item:
+        while key(current.item) != target:
             prev = current
             current = current.next
         if current == self.tail:
